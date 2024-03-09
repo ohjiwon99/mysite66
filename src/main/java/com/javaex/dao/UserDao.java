@@ -37,4 +37,12 @@ public class UserDao {
 		System.out.println(userVo);
 		return count;
 	}
+
+	public UserVo userUpdateform(int no) {
+		System.out.println("userDao.userUpdateform()");
+		
+		UserVo userVo = sqlSession.selectOne("user.updateform", no);
+		
+		return userVo;
+	}
 }

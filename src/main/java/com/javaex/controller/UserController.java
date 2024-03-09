@@ -2,6 +2,7 @@ package com.javaex.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.javaex.service.UserService;
 import com.javaex.vo.UserVo;
 
-import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -76,9 +76,16 @@ public class UserController {
 
 	// 회원정보수정 폼
 	@RequestMapping(value = "/user/modifyform", method = { RequestMethod.GET, RequestMethod.POST })
-	public String modifyForm() {
+	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("UserController.modifyForm()");
-
+		
+		UserVo user=(UserVo) session.getAttribute("authUser");
+		int no=user.getNo();
+		
+		UserVo userVo = userService.exeupdateform(no);
+		
+		model.addAttribute("userVo", userVo);
+		
 		return "user/modifyForm";
 	}
 
@@ -87,6 +94,10 @@ public class UserController {
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController.modify()");
 
+		UserVo user=(UserVo) session.getAttribute("authUser");
+		int no=user.getNo();
+		
+		userVo.setNo(no);
 		userService.exeUpdate(userVo);
 
 		session.setAttribute("authUser", userVo);

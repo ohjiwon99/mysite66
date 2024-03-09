@@ -44,25 +44,24 @@
 				<div id="user">
 					<div id="modifyForm">
 						<form action="${pageContext.request.contextPath}/user/modify" method="get">
-	
-							<input type="hidden" name="no" value="${authUser.no}">
+
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
-								<span class="text-large bold">${authUser.id}</span>
-								<input type="hidden" name="id" value="${authUser.id}">
+								<span class="text-large bold">${userVo.id}</span>
+								<input type="hidden" name="id" value="${userVo.id}">
 							</div>
 	
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> 
-								<input type="text" id="input-pass" name="password" value="${authUser.password}">
+								<input type="text" id="input-pass" name="password" value="${userVo.password}">
 							</div>
 	
 							<!-- 이메일 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> 
-								<input type="text" id="input-name" name="name" value="${authUser.name}">
+								<input type="text" id="input-name" name="name" value="${userVo.name}">
 							</div>
 	
 							<!-- //나이 -->

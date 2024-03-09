@@ -37,4 +37,12 @@ public class UserService {
 		return count;
 	}
 
+	public UserVo exeupdateform(int no) {
+		System.out.println("UserService.exeUpdateform()");
+		
+		UserVo userVo = userDao.userUpdateform(no);
+		
+		return userVo;
+	}
+
 }

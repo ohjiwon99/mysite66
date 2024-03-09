@@ -13,7 +13,7 @@
 
 	<select id="selectByIdPw" parameterType="com.javaex.vo.UserVo" resultMap="resultMapUserVo">
 		<![CDATA[	
-			select no, name, id, password, gender
+			select no, name
 			from users
 			where id=#{id} and password=#{password}
 		]]>
@@ -30,8 +30,15 @@
 		<![CDATA[	
 			update users
 			set password= #{password}, name =  #{name}, gender= #{gender}
-			where no=#{no};
+			where no=#{no}
 		]]>
 	</update>
 
+	<select id="updateform" parameterType="int" resultMap="resultMapUserVo">
+		<![CDATA[	
+			select no, name, id, password, gender
+			from users
+			where no=#{no}
+		]]>
+	</select>
 </mapper>
