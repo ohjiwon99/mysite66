@@ -76,7 +76,7 @@
 						<input type="hidden" name="action" value="add">
 
 					</form>
-					 <c:forEach items="${guestList}" var="guestVo">
+					<!-- <c:forEach items="${gList }" var="guestVo">
 						<table class="guestRead">
 							<colgroup>
 								<col style="width: 10%;">
@@ -87,14 +87,14 @@
 							<tr>
 								<td>${guestVo.no }</td>
 								<td>${guestVo.name }</td>
-								<td>${guestVo.regDate }</td>
+								<td>${guestVo.date }</td>
 								<td><a href="${pageContext.request.contextPath}/guest/deleteform?no=${guestVo.no }">[삭제]</a></td>
 							</tr>
 							<tr>
 								<td colspan=4 class="text-left">${guestVo.content }</td>
 							</tr>
 						</table>
-					</c:forEach>
+					</c:forEach> -->
 
 				</div>
 				<!-- //guestbook -->
@@ -109,5 +109,12 @@
 	<!-- //wrap -->
 
 </body>
+
+<script>
+	//DOM tree가 생성되었을 때
+	document.addEventListener("DOMContentLoaded", function(){
+		
+	});
+</script>
 
 </html>
