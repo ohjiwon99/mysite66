@@ -2,5 +2,5 @@
 	pageEncoding="UTF-8"%>
 
 	<div id="footer">
-		Copyright ⓒ 2020 이예슬. All right reserved
+		Copyright ⓒ 2020 오지원. All right reserved
 	</div>

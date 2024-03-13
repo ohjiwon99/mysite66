@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -8,11 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="${pageContext.request.contextPath}/assets/css/mysite.css"
-	rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/guestbook.css"
-	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
+
+<!-- Axios 라이브러리 포함 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -63,8 +63,7 @@
 									<td><input id="input-pass" type="password" name="pass"></td>
 								</tr>
 								<tr>
-									<td colspan="4"><textarea name="content" cols="72"
-											rows="5"></textarea></td>
+									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
 								</tr>
 								<tr class="button-area">
 									<td colspan="4" class="text-center"><button type="submit">등록</button></td>
@@ -76,25 +75,8 @@
 						<input type="hidden" name="action" value="add">
 
 					</form>
-					<!-- <c:forEach items="${gList }" var="guestVo">
-						<table class="guestRead">
-							<colgroup>
-								<col style="width: 10%;">
-								<col style="width: 40%;">
-								<col style="width: 40%;">
-								<col style="width: 10%;">
-							</colgroup>
-							<tr>
-								<td>${guestVo.no }</td>
-								<td>${guestVo.name }</td>
-								<td>${guestVo.date }</td>
-								<td><a href="${pageContext.request.contextPath}/guest/deleteform?no=${guestVo.no }">[삭제]</a></td>
-							</tr>
-							<tr>
-								<td colspan=4 class="text-left">${guestVo.content }</td>
-							</tr>
-						</table>
-					</c:forEach> -->
+					<div id ="guestbookListArea" >
+					</div>
 
 				</div>
 				<!-- //guestbook -->
@@ -113,8 +95,71 @@
 <script>
 	//DOM tree가 생성되었을 때
 	document.addEventListener("DOMContentLoaded", function(){
-		
+		//리스트요청 데이터만 받을거야
+		axios({
+			method: 'get', // put, post, delete
+			url: '/mysite6/api/guestbooks',
+			headers: {"Content-Type" : "application/json; charset=utf-8"}, //전송타입
+			//params: guestVo, //get방식 파라미터로 값이 전달
+			//data: guestVo, //put, post, delete 방식 자동으로 JSON으로 변환 전달
+			responseType: 'json' //수신타입
+			
+			}).then(function (response) {
+				console.log(response); //수신데이터
+				console.log(response.data);//수신데이터
+				
+				//리스트자리에
+				//글을 추가한다
+				for (let i = 0; i <response.data.length; i++) {
+					let guestVo = response.data[i];
+					render(guestVo);
+				}
+				
+			
+			}).catch(function (error) {
+				console.log(error);
+			});
 	});
+	
+	
+	
+	
+	
+	////////////함수들/////////////
+	function render (guestVo){
+		console.log(render); 
+		console.log(guestVo); 			
+		
+		let guestbookListArea = document.querySelector("#guestbookListArea");
+		console.log(guestbookListArea); 
+		
+		let str = '';
+		str += ' <table class="guestRead">';
+		str += ' <colgroup>';
+		str += '      <col style="width: 10%;">';
+		str += '      <col style="width: 40%;">';
+		str += '      <col style="width: 40%;">';
+		str += '      <col style="width: 10%;">';
+		str += ' </colgroup>';
+		str += ' <tr>';
+		str += '      <td>'+ guestVo.no +'</td>';
+		str += '      <td>오지원</td>';
+		str += '      <td>2022-02-02</td>';
+		str += '      <td><a href="">[삭제]</a></td>';
+		str += ' </tr>';
+		str += ' <tr>';
+		str += '      <td colspan=4 class="text-left">방문합니다</td>';
+		str += ' </tr>';
+		str += ' </table>';
+	
+		 
+		guestbookListArea.insertAdjacentHTML("beforeend", str);
+
+		//http://localhost:8880/mysite6/guest/ajaxindex
+	}
+	
+	
+	
 </script>
 
 </html>
