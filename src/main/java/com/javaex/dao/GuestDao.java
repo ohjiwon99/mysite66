@@ -37,4 +37,29 @@ public class GuestDao {
 		return count;
 	}
 
+	// ajax등록
+	public int insertSelectKey(GuestVo guestVo) {
+		System.out.println("guestDao.insertSelectKey()");
+
+		// System.out.println(guestVo);// no비어있음
+		int count = sqlSession.insert("insertSelectKey", guestVo);
+		// System.out.println(guestVo);// no 생김
+		// guestVo.getNo();
+
+		// GuestVo gvo = sqlSession.selectOne("guest.selectOne", guestVo.getNo());
+		// System.out.println(gvo);
+
+		return count;
+	}
+
+	// 데이터 한개 가져오기
+	public GuestVo guestselectOne(int no) {
+		System.out.println("guestDao.guestselectOne()");
+
+		 GuestVo guestVo = sqlSession.selectOne("guest.selectOne",no);
+		 System.out.println(guestVo);
+
+		return guestVo;
+	}
+
 }
