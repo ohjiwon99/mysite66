@@ -1,22 +1,22 @@
 package com.javaex.vo;
 
 public class GalleryVo {
-	
+
 	private int no;
 	private int user_no;
 	private String content;
 	private String filePath;
 	private String orgName;
 	private String saveName;
-	private String fileSize;
-	
-	
-	
-	
+	private long fileSize;
+	private String name;
+
 	public GalleryVo() {
+		super();
 	}
-	
-	public GalleryVo(int user_no, String content, String filePath, String orgName, String saveName,String fileSize) {
+
+	public GalleryVo(int user_no, String content, String filePath, String orgName, String saveName, long fileSize) {
+		super();
 		this.user_no = user_no;
 		this.content = content;
 		this.filePath = filePath;
@@ -24,19 +24,22 @@ public class GalleryVo {
 		this.saveName = saveName;
 		this.fileSize = fileSize;
 	}
-	
-	public GalleryVo(String content, String filePath, String orgName, String saveName,String fileSize) {
+
+	public GalleryVo(int user_no, String content, String filePath, String orgName, String saveName, long fileSize,
+			String name) {
+		super();
+		this.user_no = user_no;
 		this.content = content;
 		this.filePath = filePath;
 		this.orgName = orgName;
 		this.saveName = saveName;
 		this.fileSize = fileSize;
+		this.name = name;
 	}
 
-
-
 	public GalleryVo(int no, int user_no, String content, String filePath, String orgName, String saveName,
-			String fileSize) {
+			long fileSize, String name) {
+		super();
 		this.no = no;
 		this.user_no = user_no;
 		this.content = content;
@@ -44,6 +47,7 @@ public class GalleryVo {
 		this.orgName = orgName;
 		this.saveName = saveName;
 		this.fileSize = fileSize;
+		this.name = name;
 	}
 
 	public int getNo() {
@@ -94,27 +98,26 @@ public class GalleryVo {
 		this.saveName = saveName;
 	}
 
-	public String getFileSize() {
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(String fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
 		return "GalleryVo [no=" + no + ", user_no=" + user_no + ", content=" + content + ", filePath=" + filePath
-				+ ", orgName=" + orgName + ", saveName=" + saveName + ", fileSize=" + fileSize + "]";
+				+ ", orgName=" + orgName + ", saveName=" + saveName + ", fileSize=" + fileSize + ", name=" + name + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-
-	
 
 }

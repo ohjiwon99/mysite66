@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gallery">
+
+	<!-- 쿼리문 작성 -->
+
+	<!-- personVo 매핑 -->
+	<!-- <resultMap id="resultMapPersonVo" type="PersonVo" > <result column="person_id" property="personId"></result> <result column="name" property="name"></result> 
+		<result column="hp" property="hp"></result> <result column="company" property="company"></result> </resultMap> -->
+	<!-- 전체리스트 -->
+	<select id="selectList" resultType="GalleryVo">
+		<![CDATA[
+			select g.no,
+				   g.user_no,
+				   g.content,
+			       g.filePath,
+			       g.orgName,
+			       g.saveName,
+			       g.fileSize,
+			       u.name
+			from gallery g
+			left join users u on u.no = g.user_no
+		]]>
+	</select>
+
+	<!-- 1명 데이터 가져오기 -->
+	<select id="selectOne" parameterType="int" resultType="GalleryVo">
+		<![CDATA[
+			select g.no,
+				   g.user_no,
+				   g.content,
+			       g.filePath,
+			       g.orgName,
+			       g.saveName,
+			       g.fileSize,
+			       u.name
+			from gallery g
+			left join users u on u.no = g.user_no
+			where u.no= #{ no }
+		]]>
+	</select>
+
+
+
+
+
+
+	<!-- 추가 insert -->
+	<insert id="galleryInsert" parameterType="GalleryVo">
+		<![CDATA[
+			insert into gallery
+			values (null, #{ user_no }, #{ content }, #{ filePath }, #{ orgName }, #{ saveName },  #{ fileSize })
+		]]>
+	</insert>
+
+
+
+	<!-- ajax삭제(저장하고 번호알아내기) -->
+	<delete id="deleteSelectKey" parameterType="GalleryVo">
+		<![CDATA[
+			delete from gallery
+			where no = #{ no }
+			
+		]]>
+
+	</delete>
+
+
+
+
+</mapper>
